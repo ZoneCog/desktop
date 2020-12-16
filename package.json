@@ -2,14 +2,15 @@
   "name": "desktop",
   "version": "0.0.1",
   "description": "Base project for creating a console application in Typescript",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "jest",
     "start": "node ./lib/index.js",
     "prebuild": "npm run lint && rm -rf lib/*",
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
-    "pretest": "rm -rf coverage/*"
+    "pretest": "rm -rf coverage/*",
+    "app": "electron ."
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "@types/node": "^14.14.14",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
+    "electron": "^11.1.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-import": "^2.22.1",
