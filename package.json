@@ -1,21 +1,29 @@
 {
-  "name": "desktop",
+  "name": "domain-graph-desktop",
   "version": "0.0.1",
   "description": "Base project for creating a console application in Typescript",
   "main": "main.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./lib/index.js",
+    "start": "electron-forge start",
     "prebuild": "npm run lint && rm -rf lib/*",
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "pretest": "rm -rf coverage/*",
-    "app": "electron ."
+    "app": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [],
   "author": "",
   "private": true,
+  "license": "MIT",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.14",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
@@ -28,5 +36,36 @@
     "prettier": "^2.2.1",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "domain-graph": "0.0.8",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "DomainGraph Desktop"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
