@@ -1,10 +1,7 @@
-export function reverseString(forward: string): string {
-  if (!forward) return forward;
+import './index.less';
 
-  return forward
-    .split('')
-    .reverse()
-    .join('');
-}
+console.log('hello world');
 
-console.log('This is the example typescript application!');
+const el = document.createElement('h1');
+el.innerText = 'Random number: ' + Math.random();
+document.body.appendChild(el);
