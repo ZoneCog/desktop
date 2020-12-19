@@ -6,7 +6,9 @@
     "outDir": "dist",
     "sourceMap": true,
     "target": "es6",
-    "declaration": true
+    "declaration": true,
+    "jsx": "react",
+    "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "exclude": []

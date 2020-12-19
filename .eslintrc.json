@@ -19,7 +19,12 @@
     "@typescript-eslint/triple-slash-reference": "error",
     "@typescript-eslint/unified-signatures": "warn",
     "no-param-reassign": "error",
-    "import/no-unassigned-import": "warn",
+    "import/no-unassigned-import": [
+      "error",
+      {
+        "allow": ["**/*.less"]
+      }
+    ],
     "comma-dangle": ["error", "only-multiline"],
     "constructor-super": "error",
     "eqeqeq": ["warn", "always"],
