@@ -53,7 +53,7 @@
     "webpack-merge": "^5.7.2"
   },
   "dependencies": {
-    "domain-graph": "0.0.8",
+    "domain-graph": "0.0.9",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

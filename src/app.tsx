@@ -1,22 +1,38 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
+import { promises as fs } from 'fs';
 import electron from 'electron';
 
-export const App: React.FC<{}> = () => {
-  const randomNumber = useMemo(() => Math.random(), []);
+import { DomainGraph } from 'domain-graph';
+import { DataProvider, OpenFilesResult } from 'domain-graph/lib/data-provider';
 
-  const handleClick = useCallback(async () => {
+export const App: React.VFC = () => {
+  const handleDrop = useCallback(async () => {
+    return true;
+  }, []);
+
+  const handleShowOpenDialog = useCallback(async () => {
     const value = await electron.remote.dialog.showOpenDialog({
       properties: ['openFile'],
     });
 
-    console.log(value.canceled, value.filePaths);
+    const buffers = await Promise.all(
+      value.filePaths.map((filePath) => fs.readFile(filePath)),
+    );
+
+    const result: OpenFilesResult = {
+      canceled: value.canceled,
+      files: buffers.map((buffer, i) => ({
+        filePath: value.filePaths[i],
+        contents: buffer.toString(),
+      })),
+    };
+
+    return result;
   }, []);
 
   return (
-    <>
-      Hello from React!
-      <h1>Random number: {randomNumber}</h1>
-      <button onClick={handleClick}>open files</button>
-    </>
+    <DataProvider onDrop={handleDrop} onShowOpenDialog={handleShowOpenDialog}>
+      {(introspection) => <DomainGraph introspection={introspection} />}
+    </DataProvider>
   );
 };
